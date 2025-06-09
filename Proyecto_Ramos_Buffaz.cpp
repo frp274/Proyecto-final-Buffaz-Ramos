@@ -1874,6 +1874,7 @@ int main()
 {
     auto inicio = high_resolution_clock::now(); // Marca el inicio del reloj
     int opcion;
+    string opcionStr;
     ifstream file("ventas_sudamerica_limpio.csv");
     vector<Venta> ventas = leerArchivoCSV("ventas_sudamerica_limpio.csv");
     string archivoVentas = "ventas_sudamerica_limpio.csv";
@@ -1928,20 +1929,44 @@ int main()
         cout << "| 3. Procesamiento de datos del CSV             |\n";
         cout << "| 4. Salir                                      |\n";
         cout << "+-----------------------------------------------+\n";
-        cout << "| Conteo actual de 'if': " << ifs <<endl;;
+        cout << "| Conteo actual de 'if': " << ifs << endl;
+        ;
         cout << "+-----------------------------------------------+\n";
         cout << "Ingrese una opcion: ";
-        cin >> opcion;
+        cin >> opcionStr;
         cout << endl;
+
+        // Validar si es número
+        bool esNumero = true;
+        for (char c : opcionStr)
+        {
+            if (!isdigit(c))
+            {
+                esNumero = false;
+                break;
+            }
+        }
+        if (!esNumero)
+        {
+            cout << "Por favor, ingrese un numero valido.\n";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            // volver a pedir el dato o salir
+        }
+        else
+        {
+            opcion = stoi(opcionStr);
+        }
 
         switch (opcion)
         {
         case 1:
         {
             int subop;
+            string subopStr;
             do
             {
-                cout<<endl;
+                cout << endl;
                 ifs++;
                 cout << "+--------------------------------------------+\n";
                 cout << "|       ADMINISTRADOR DE VENTAS              |\n";
@@ -1952,8 +1977,25 @@ int main()
                 cout << "| 4. Volver al menu principal                |\n";
                 cout << "+--------------------------------------------+\n";
                 cout << "Seleccione una opcion: ";
-                cin >> subop;
+                cin >> subopStr;
                 cout << endl;
+
+                // Validar si es número
+                bool esNumero = true;
+                for (char c : subopStr)
+                {
+                    if (!isdigit(c))
+                    {
+                        esNumero = false;
+                        break;
+                    }
+                }
+                if (!esNumero)
+                {
+                    cout << "Por favor, ingrese un numero valido.\n";
+                    continue;
+                }
+                subop = stoi(subopStr);
 
                 switch (subop)
                 {
@@ -1985,6 +2027,7 @@ int main()
         case 2:
         {
             int subopp;
+            string suboppStr;
             do
             {
                 ifs++;
@@ -2000,8 +2043,25 @@ int main()
                 cout << "| 7. Volver al menu principal                                              |\n";
                 cout << "+--------------------------------------------------------------------------+\n";
                 cout << "Seleccione una opcion: ";
-                cin >> subopp;
+                cin >> suboppStr;
                 cout << endl;
+
+                // Validar si es número
+                bool esNumero = true;
+                for (char c : suboppStr)
+                {
+                    if (!isdigit(c))
+                    {
+                        esNumero = false;
+                        break;
+                    }
+                }
+                if (!esNumero)
+                {
+                    cout << "Por favor, ingrese un numero valido.\n";
+                    continue;
+                }
+                subopp = stoi(suboppStr);
 
                 switch (subopp)
                 {
@@ -2064,6 +2124,7 @@ int main()
                     break;
                 }
                 case 7:
+                {
                     ifs++;
                     cout << endl;
                     cout << "\nVolviendo....\n";
@@ -2072,12 +2133,15 @@ int main()
                 default:
                     break;
                 }
+                }
             } while (subopp != 7);
             break;
         }
         case 3:
+        {
             ifs++;
             int suboppp;
+            string subopppStr;
             do
             {
                 ifs++;
@@ -2094,8 +2158,30 @@ int main()
                 cout << "| 8. Volver al menu                                            |\n";
                 cout << "+--------------------------------------------------------------+\n";
                 cout << "Seleccione una opcion: ";
-                cin >> suboppp;
+                cin >> subopppStr;
                 cout << endl;
+
+                // Validar si es número
+                bool esNumero = true;
+                for (char c : subopppStr)
+                {
+                    if (!isdigit(c))
+                    {
+                        esNumero = false;
+                        break;
+                    }
+                }
+                if (!esNumero)
+                {
+                    cout << "Por favor, ingrese un numero valido.\n";
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    // volver a pedir el dato o salir
+                }
+                else
+                {
+                    suboppp = stoi(subopppStr);
+                }
 
                 switch (suboppp)
                 {
@@ -2139,21 +2225,28 @@ int main()
                     cout << "\nVolviendo...\n";
                     break;
                 default:
+                    cout << "Ingrese un numero valido...." << endl;
                     break;
                 }
             } while (suboppp != 8);
             break;
-
+        }
         case 4:
+        {
             ifs++;
             cout << endl;
             cout << "Saliendo del programa..." << endl;
             break;
+        }
         default:
+        {
             ifs++;
             cout << endl;
             cout << "Opcion invalida. Intentelo de nuevo.(HELL NAHH....)" << endl;
             break;
         }
+        }
     } while (opcion != 4);
 }
+
+
