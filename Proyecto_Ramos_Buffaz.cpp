@@ -48,7 +48,6 @@ vector<Venta> leerArchivoCSV(const string &nombreArchivo)
         stringstream ss(linea);
         Venta venta;
         string dato;
-        ifs++;
         getline(ss, dato, ',');
         venta.id = stoi(dato);
         getline(ss, venta.fecha, ',');
@@ -81,7 +80,7 @@ Pila<string> soloPaises(const vector<Venta> ventas)
 
     for (size_t i = 0; i < ventas.size(); i++)
     {
-        ifs++;
+        
         bool repetido = false;
 
         string datoVentas = ventas[i].pais;
@@ -92,26 +91,27 @@ Pila<string> soloPaises(const vector<Venta> ventas)
         }
         else
         {
-            ifs++;
+            
             while (!PilaDePaises.esVacia())
             {
-                ifs++;
+                
                 string datoPila = PilaDePaises.pop();
                 pilaAux.push(datoPila);
                 if (datoVentas == datoPila)
                 {
+                    ifs++;
                     repetido = true;
                     break;
                 }
             }
-            ifs++;
+            
             if (!repetido)
             {
+                ifs++;
                 pilaAux.push(datoVentas);
             }
             while (!pilaAux.esVacia())
             {
-                ifs++;
                 PilaDePaises.push(pilaAux.pop());
             }
         }
@@ -155,14 +155,11 @@ void top5ciudades(const vector<Venta> &ventas)
     // Recorrer ventas y acumular monto por ciudad y pais
     for (size_t i = 0; i < ventas.size(); i++)
     {
-        ifs++;
-        ifs_local++;
         bool paisExiste = false;
 
         for (size_t j = 0; j < vectorTop5.size(); j++)
         {
-            ifs++;
-            ifs_local++;
+            
             if (ventas[i].pais == vectorTop5[j].pais)
             {
                 ifs++;
@@ -291,8 +288,7 @@ void top5ciudades(const vector<Venta> &ventas)
         {
             for (int b = 0; b < 4; b++)
             {
-                ifs++;
-                ifs_local++;
+                
                 if (montos[b] < montos[b + 1])
                 {
                     ifs++;
@@ -395,8 +391,7 @@ void montoTotalPorProductoYPais(vector<Venta> &ventas, Pila<string> &pilaPaises)
         // Buscamos si ya existe en el vector resumen
         for (size_t j = 0; j < resumen.size(); j++)
         {
-            ifs++; // if de busqueda
-            ifs_local++;
+            
             if (resumen[j].producto == prod && resumen[j].pais == pais)
             {
                 ifs++;
@@ -406,9 +401,6 @@ void montoTotalPorProductoYPais(vector<Venta> &ventas, Pila<string> &pilaPaises)
                 break;
             }
         }
-
-        ifs++; // if de control
-        ifs_local++;
         if (!encontrado)
         {
             ifs++;
@@ -427,7 +419,6 @@ void montoTotalPorProductoYPais(vector<Venta> &ventas, Pila<string> &pilaPaises)
     cout << "\n- - - MONTO TOTAL POR PRODUCTO Y PAIS - - -" << endl;
     while (!pilaPaises.esVacia())
     {
-        ifs++;
 
         string paisActual = pilaPaises.pop();
         pilaPaisesAux.push(paisActual);
@@ -436,7 +427,7 @@ void montoTotalPorProductoYPais(vector<Venta> &ventas, Pila<string> &pilaPaises)
         cout << "+--------------------------------------------+" << endl;
         for (size_t i = 0; i < resumen.size(); i++)
         {
-            ifs++;
+            
             if (paisActual == resumen[i].pais)
             {
                 ifs++;
@@ -450,7 +441,6 @@ void montoTotalPorProductoYPais(vector<Venta> &ventas, Pila<string> &pilaPaises)
     while (!pilaPaisesAux.esVacia())
     {
         string paispila = pilaPaisesAux.pop();
-        ifs++;
         pilaPaises.push(paispila);
     }
 
@@ -513,7 +503,7 @@ void PromVentasCatPais(const vector<Venta> &ventas)
             }
         }
 
-        ifs++; // if de control
+        
         if (!encontradaCat)
         {
             ifs++;
@@ -608,8 +598,7 @@ void MedioEnvioMasUsadoPorPaisYCategoria(const vector<Venta> &ventas, Pila<strin
                 ifs++;
                 break;
             }
-            ifs++;
-            ifs_local++;
+            
         }
 
         if (!encontradoPais)
@@ -635,8 +624,7 @@ void MedioEnvioMasUsadoPorPaisYCategoria(const vector<Venta> &ventas, Pila<strin
                 ifs++;
                 break;
             }
-            ifs++;
-            ifs_local++;
+            
         }
 
         if (!encontradoCat)
@@ -675,8 +663,7 @@ void MedioEnvioMasUsadoPorPaisYCategoria(const vector<Venta> &ventas, Pila<strin
                     maxCantidad = VecPaisMedio[i].cantidad;
                     medioMax = VecPaisMedio[i].medio;
                 }
-                ifs++;
-                ifs_local++;
+                
             }
         }
 
@@ -685,7 +672,6 @@ void MedioEnvioMasUsadoPorPaisYCategoria(const vector<Venta> &ventas, Pila<strin
 
     while (!pilaAux.esVacia())
     {
-        ifs++;
         pilaPaises.push(pilaAux.pop());
     }
 
@@ -709,8 +695,7 @@ void MedioEnvioMasUsadoPorPaisYCategoria(const vector<Venta> &ventas, Pila<strin
                 ifs++;
                 break;
             }
-            ifs++;
-            ifs_local++;
+            
         }
         if (!existe)
         {
@@ -780,8 +765,6 @@ void DiaConMayorMontoVentas(const vector<Venta> &ventas)
         // Verificamos si ya existe esa fecha en el vector
         for (size_t j = 0; j < fechas.size(); j++)
         {
-            ifs++;
-            ifs_local++;
             if (fechas[j].fecha == fechaActual)
             {
                 ifs++;
@@ -793,8 +776,7 @@ void DiaConMayorMontoVentas(const vector<Venta> &ventas)
         }
 
         // Si no estaba, la agregamos
-        ifs++;
-        ifs_local++;
+        
         if (!encontrada)
         {
             ifs++;
@@ -817,7 +799,6 @@ void DiaConMayorMontoVentas(const vector<Venta> &ventas)
             // Insertamos temp en su posicion correcta en el subarray actual
             while (j >= gap && fechas[j - gap].montoAcumulado < temp.montoAcumulado)
             {
-                ifs++; // solo un if por comparacion real
                 fechas[j] = fechas[j - gap];
                 j -= gap;
             }
@@ -871,18 +852,18 @@ void EstadoEnvioMasFrecuentePorPais(const vector<Venta> &ventas, Pila<string> &p
         for (size_t i = 0; i < ventas.size(); i++)
         {
             // Verificamos si la venta corresponde al pais actual
-            ifs++;
-            ifs_local++;
+            
             if (ventas[i].pais == paisActual)
             {
+                ifs++;
+                ifs_local++;
                 string estado = ventas[i].estado_envio;
                 bool encontrado = false;
 
                 // Buscamos si ya se ha contado este estado en este pais
                 for (size_t j = 0; j < estadosPais.size(); j++)
                 {
-                    ifs++;
-                    ifs_local++;
+                    
                     if (estadosPais[j].estado == estado)
                     {
                         ifs++;
@@ -894,8 +875,7 @@ void EstadoEnvioMasFrecuentePorPais(const vector<Venta> &ventas, Pila<string> &p
                 }
 
                 // Si el estado no estaba registrado, lo agregamos
-                ifs++;
-                ifs_local++;
+               
                 if (!encontrado)
                 {
                     EstadoPorPais nuevo;
@@ -911,8 +891,7 @@ void EstadoEnvioMasFrecuentePorPais(const vector<Venta> &ventas, Pila<string> &p
         int cantMax = -1;
         for (size_t i = 0; i < estadosPais.size(); i++)
         {
-            ifs++;
-            ifs_local++;
+            
             if (estadosPais[i].cantidad > cantMax)
             {
                 ifs++;
@@ -977,8 +956,7 @@ void productoMasYMenosVendido(const vector<Venta> &ventas)
             }
         }
 
-        ifs++;
-        ifs_local++; // if para verificar si no estaba
+       
         if (!encontrado)
         {
             ifs++;
@@ -1005,8 +983,7 @@ void productoMasYMenosVendido(const vector<Venta> &ventas)
 
     for (size_t i = 1; i < vectorProd.size(); i++)
     {
-        ifs++; // if para maximo
-        ifs_local++;
+        
         if (vectorProd[i].cantidadVendida > masVendido.cantidadVendida)
         {
             ifs++;
@@ -1014,8 +991,7 @@ void productoMasYMenosVendido(const vector<Venta> &ventas)
             masVendido = vectorProd[i];
         }
 
-        ifs++; // if para minimo
-        ifs_local++;
+        
         if (vectorProd[i].cantidadVendida < menosVendido.cantidadVendida)
         {
             ifs++;
@@ -1299,8 +1275,7 @@ void listarVentasPorCiudad(const vector<Venta> &ventas)
 
     for (size_t i = 0; i < ventas.size(); i++)
     { // Este bucle recorre el vector ventas, en busca de las ventas que coincidan con la ciudad a buscar
-        ifs++;
-        ifs_local++; // filtro por ciudad
+        // filtro por ciudad
         if (ventas[i].ciudad == ciudadBuscada)
         {
             ifs++;
@@ -1349,8 +1324,7 @@ void listarVentasPorPaisYFechas(const vector<Venta> &ventas)
 
     for (size_t i = 0; i < ventas.size(); i++)
     { // Primero en este bucle busca en el vector ventas que coincidan los paises
-        ifs++;
-        ifs_local++; // filtro por pais
+         // filtro por pais
         if (ventas[i].pais == paisBuscado)
         {
             ifs++;
@@ -1399,8 +1373,7 @@ void compararDosPaises(const vector<Venta> &ventas, string pais1, string pais2)
     // Recorre todas las ventas
     for (size_t i = 0; i < ventas.size(); i++)
     {
-        ifs++;
-        ifs_local++;
+       
         // Si la venta corresponde al primer pais
         if (ventas[i].pais == pais1)
         {
@@ -1414,8 +1387,7 @@ void compararDosPaises(const vector<Venta> &ventas, string pais1, string pais2)
             bool encontrado = false;
             for (int j = 0; j < productos1.size(); j++)
             {
-                ifs++;
-                ifs_local++;
+                
                 if (productos1[j] == prod)
                 {
                     ifs++;
@@ -1439,8 +1411,7 @@ void compararDosPaises(const vector<Venta> &ventas, string pais1, string pais2)
             encontrado = false;
             for (int j = 0; j < medios1.size(); j++)
             {
-                ifs++;
-                ifs_local++;
+                
                 if (medios1[j] == medio)
                 {
                     ifs++;
@@ -1471,8 +1442,7 @@ void compararDosPaises(const vector<Venta> &ventas, string pais1, string pais2)
             bool encontrado = false;
             for (int j = 0; j < productos2.size(); j++)
             {
-                ifs++;
-                ifs_local++;
+                
                 if (productos2[j] == prod)
                 {
                     ifs++;
@@ -1494,8 +1464,7 @@ void compararDosPaises(const vector<Venta> &ventas, string pais1, string pais2)
             encontrado = false;
             for (int j = 0; j < medios2.size(); j++)
             {
-                ifs++;
-                ifs_local++;
+               
                 if (medios2[j] == medio)
                 {
                     ifs++;
@@ -1527,8 +1496,7 @@ void compararDosPaises(const vector<Venta> &ventas, string pais1, string pais2)
 
     for (int i = 0; i < productos1.size(); i++)
     {
-        ifs++;
-        ifs_local++;
+        
         if (cantidades1[i] > max1)
         {
             ifs++;
@@ -1540,8 +1508,7 @@ void compararDosPaises(const vector<Venta> &ventas, string pais1, string pais2)
 
     for (int i = 0; i < productos2.size(); i++)
     {
-        ifs++;
-        ifs_local++;
+        
         if (cantidades2[i] > max2)
         {
             ifs++;
@@ -1562,8 +1529,7 @@ void compararDosPaises(const vector<Venta> &ventas, string pais1, string pais2)
 
     for (int i = 0; i < medios1.size(); i++)
     {
-        ifs++;
-        ifs_local++;
+        
         if (veces1[i] > maxEnvio1)
         {
             ifs++;
@@ -1575,8 +1541,7 @@ void compararDosPaises(const vector<Venta> &ventas, string pais1, string pais2)
 
     for (int i = 0; i < medios2.size(); i++)
     {
-        ifs++;
-        ifs_local++;
+        
         if (veces2[i] > maxEnvio2)
         {
             ifs++;
@@ -1615,8 +1580,7 @@ void compararDosProductos(const vector<Venta> &ventas, string prod1, string prod
     // Recorremos todas las ventas
     for (int i = 0; i < ventas.size(); i++)
     {
-        ifs++;
-        ifs_local++;
+        
         if (ventas[i].producto == prod1 || ventas[i].producto == prod2)
         {
             ifs++;
@@ -1627,8 +1591,7 @@ void compararDosProductos(const vector<Venta> &ventas, string prod1, string prod
             // Buscamos si ya registramos ese pais
             for (int j = 0; j < paises.size(); j++)
             {
-                ifs++;
-                ifs_local++;
+                
                 if (paises[j] == pais)
                 {
                     ifs++;
@@ -1704,8 +1667,7 @@ void productosPromedioDebajo(const vector<Venta> &ventas, string pais, float umb
     // Recorremos todas las ventas
     for (int i = 0; i < ventas.size(); i++)
     {
-        ifs++;
-        ifs_local++;
+        
         if (ventas[i].pais == pais)
         { // Solo consideramos ventas del pais especificado
             ifs++;
@@ -1719,8 +1681,7 @@ void productosPromedioDebajo(const vector<Venta> &ventas, string pais, float umb
             // Buscamos si el producto ya esta en la lista
             for (int j = 0; j < productos.size(); j++)
             {
-                ifs++;
-                ifs_local++;
+                
                 if (productos[j] == prod)
                 {
                     ifs++;
@@ -1753,8 +1714,7 @@ void productosPromedioDebajo(const vector<Venta> &ventas, string pais, float umb
 
     for (int i = 0; i < productos.size(); i++)
     {
-        ifs++;
-        ifs_local++;
+        
         if (cantidadTotal[i] > 0)
         { // Evitamos division por cero
             ifs++;
@@ -1794,8 +1754,7 @@ void productosPromedioEncima(const vector<Venta> &ventas, string pais, float umb
     // Recorremos todas las ventas
     for (int i = 0; i < ventas.size(); i++)
     {
-        ifs++;
-        ifs_local++;
+        
         if (ventas[i].pais == pais)
         { // Solo consideramos ventas del pais especificado
             ifs++;
@@ -1809,8 +1768,7 @@ void productosPromedioEncima(const vector<Venta> &ventas, string pais, float umb
             // Buscamos si el producto ya esta en la lista
             for (int j = 0; j < productos.size(); j++)
             {
-                ifs++;
-                ifs_local++;
+                
                 if (productos[j] == prod)
                 {
                     ifs++;
@@ -1843,8 +1801,7 @@ void productosPromedioEncima(const vector<Venta> &ventas, string pais, float umb
 
     for (int i = 0; i < productos.size(); i++)
     {
-        ifs++;
-        ifs_local++;
+        
         if (cantidadTotal[i] > 0)
         { // Evitamos division por cero
             ifs++;
